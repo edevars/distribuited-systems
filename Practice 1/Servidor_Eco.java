@@ -14,7 +14,7 @@ public class Servidor_Eco {
         }
         
         int numeroPuerto = Integer.parseInt(args[0]);// convertimos el numero de puerto
-        
+        System.out.println("Servidor a la espera en el puerto: " + numeroPuerto);
         try (
             ServerSocket socketdelServidor =
                 new ServerSocket(Integer.parseInt(args[0]));//escuchando peticiones

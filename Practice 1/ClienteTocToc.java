@@ -11,11 +11,13 @@ public class ClienteTocToc {
         //almacenando caracteres en un buffer para proporcionar una lectura eficiente 
         //de caracteres, líneas y matrices.
         BufferedReader LectorDeSocket = null;
+        String nombreHost =  args[0];
+        int numeroPuerto = Integer.parseInt(args[1]);// convertimos el numero de puerto
 
         try {
             //abrimos el socket TocTocSocket para hacer peticiones al servidor
-            TocTocSocket = new Socket("127.0.0.1", 4444);
-            System.out.println("Estamos listos en el puerto " + 4444);
+            TocTocSocket = new Socket(nombreHost, numeroPuerto);
+            System.out.println("Estamos listos en el puerto " + numeroPuerto);
             //asignamos a lector y escritor el flujo de datos del socket
             EscritorEnSocket = new PrintWriter(TocTocSocket.getOutputStream(), true);
             LectorDeSocket = new BufferedReader(new InputStreamReader(TocTocSocket.getInputStream()));
@@ -23,16 +25,19 @@ public class ClienteTocToc {
             System.err.println("No se conoce al anfitrión: Juanito.");
             System.exit(1);
         } catch (IOException e) {
+            // Error que se produce cuando la conexión no está abierta
             System.err.println("No se pudo obtener E / S para la conexión a: Juanito.");
             System.exit(1);
         }
-// abrimos un lector , para leer el texto desde consola 
+        
+        // abrimos un lector , para leer el texto desde consola 
         BufferedReader EntradaTeclado = new BufferedReader(new InputStreamReader(System.in));
         //declaramos cadenas para almacenar el texto recibido del servidor 
         //y otra para el texto recibido desde consola por el usuario
         String DelServidor;
         String DelUsuario;
-// leemos lo que dice el servidor , y si hay algo escrito procedemos a ingresar al ciclo while
+
+        // leemos lo que dice el servidor , y si hay algo escrito procedemos a ingresar al ciclo while
         while ((DelServidor = LectorDeSocket.readLine()) != null) {
             System.out.println("El Servidor dice: " + DelServidor);
            // si el usuario escribe Adios, significa que hay que cerrar la transmision de datos

@@ -24,7 +24,7 @@ public class Cliente_de_Eco {
         ) {
             String usuarioEscribio;
             while ((usuarioEscribio = teclado.readLine()) != null) {
-               //escritor.println(usuarioEscribio);
+               escritor.println(usuarioEscribio);
                System.out.println("El eco del servidor dice:  " + teclado.readLine());
             }
         } catch (UnknownHostException e) {
