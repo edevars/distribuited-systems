@@ -38,6 +38,7 @@ int main(int argc, char const *argv[])
     send(sock , message , strlen(message) , 0 ); 
     printf("Message sent\n"); 
     valread = read( sock , buffer, 1024); 
-    printf("Mensaje recibido %s \n",buffer ); 
+    printf("La longitud del mensaje es: %d", strlen(buffer) - 1);
+    printf("\nMensaje recibido %s \n",buffer ); 
     return 0; 
 } 

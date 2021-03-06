@@ -14,13 +14,12 @@ public class Server {
             PrintWriter escritor = new PrintWriter(socketdelCliente.getOutputStream(), true);
             BufferedReader lector = new BufferedReader(new InputStreamReader(socketdelCliente.getInputStream()));
         ){
-            System.out.println("Servidor a la espera de una línea en el puerto: " + numeroPuerto + "\n\n");
             String linealeida;
             linealeida = lector.readLine();
-            System.out.println("La linea que manda el cliente es: " + linealeida);
-            // Regresar el doble del valor
-            Double doble = Double.parseDouble(linealeida);
-            escritor.println(Double.toString(doble*2));
+            System.out.print("\nLa longitud del mensaje es: " + (linealeida.length() + 1));
+            System.out.print("\nEl mensaje es: " + linealeida);
+            System.out.println("\nEnviando adiós");
+            escritor.println("\nAdios");
         } catch (IOException e) {
             System.out.println(" ocurrio una excepcion cuando intentamos escuchar " + numeroPuerto
                     + " o esperando por una conexicon");
