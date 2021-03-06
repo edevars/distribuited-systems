@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
     int opt = 1;
     int addrlen = sizeof(address);
     char buffer[BUFFER_LEN] = {0};
-    char *message = "Hello from server";
+    char *message = "Adios";
 
     // Creating socket file descriptor
     socket_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -65,10 +65,11 @@ int main(int argc, char const *argv[])
     }
 
     // Reading the value from the client
-    valread = read(new_socket, buffer, BUFFER_LEN);
-    printf("%s\n", buffer);
+    valread = read(new_socket , buffer, 1024); 
+    printf("La longitud del mensaje es: %d", strlen(buffer) - 1);
+    printf("\nMensaje recibido %s \n", buffer ); 
     // Sending message 
     send(new_socket, message, strlen(message), 0);
-    printf("Hello message sent\n");
+    printf("\nMensaje enviado");
     return 0;
 }
