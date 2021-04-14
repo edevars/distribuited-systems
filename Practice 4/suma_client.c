@@ -5,10 +5,10 @@
  */
 
 #include "suma.h"
+#include <stdio.h>
 
 
-void
-suma_prog_1(char *host)
+void suma_prog_1(char *host, int a, int b)
 {
 	CLIENT *clnt;
 	int  *result_1;
@@ -22,9 +22,15 @@ suma_prog_1(char *host)
 	}
 #endif	/* DEBUG */
 
+	suma_1_arg.a = a;
+	suma_1_arg.b = b;
+
+
 	result_1 = suma_1(&suma_1_arg, clnt);
 	if (result_1 == (int *) NULL) {
 		clnt_perror (clnt, "call failed");
+	} else {
+		printf("result = %d\n", *result_1);
 	}
 #ifndef	DEBUG
 	clnt_destroy (clnt);
@@ -32,16 +38,33 @@ suma_prog_1(char *host)
 }
 
 
-int
-main (int argc, char *argv[])
+int main (int argc, char *argv[])
 {
 	char *host;
+	int a, b; 
+	
+	printf("Conectando con el servidor en %s\n\n", argv[1]);
+
+	
 
 	if (argc < 2) {
 		printf ("usage: %s server_host\n", argv[0]);
 		exit (1);
 	}
 	host = argv[1];
-	suma_prog_1 (host);
-exit (0);
+
+	// Valida que el tipo de dato sea numerico en el argumento a
+	if ((a = atoi(argv[2])) == 0 && *argv[2] != '0') {
+ 		fprintf(stderr, "invalid value: %s\n", argv[2]);
+ 		exit(1);
+ 	}
+
+	// Valida que el tipo de dato sea numerico en el argumento b
+	if ((b = atoi(argv[3])) == 0 && *argv[3] != '0') {
+ 		fprintf(stderr, "invalid value: %s\n", argv[3]);
+ 		exit(1);
+ 	}
+
+	suma_prog_1 (host,a,b);
+	exit (0);
 }
